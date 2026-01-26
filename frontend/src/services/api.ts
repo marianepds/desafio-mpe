@@ -1,0 +1,40 @@
+import axios from 'axios';
+import { Location, CreateLocationDto, UpdateLocationDto, ApiResponse } from '../types/location';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export const locationService = {
+  getAll: async (search?: string, page: number = 1, pageSize: number = 20): Promise<Location[]> => {
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    params.append('page', page.toString());
+    params.append('pageSize', pageSize.toString());
+    
+    const response = await api.get<Location[]>(`/locations?${params}`);
+    const total = parseInt(response.headers['x-total-count'] || '0');
+    const totalPages = parseInt(response.headers['x-total-pages'] || '1');
+    
+    return response.data;
+  },
+  getById: async (id: number): Promise<Location> => {
+    const response = await api.get<Location>(`/locations/${id}`);
+    return response.data;
+  },
+  create: async (data: CreateLocationDto): Promise<Location> => {
+    const response = await api.post<Location>('/locations', data);
+    return response.data;
+  },
+  update: async (id: number, data: UpdateLocationDto): Promise<void> => {
+    await api.put(`/locations/${id}`, data);
+  },
+  delete: async (id: number): Promise<void> => {
+    await api.delete(`/locations/${id}`);
+  },
+};
