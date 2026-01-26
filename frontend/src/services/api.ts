@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Location, CreateLocationDto, UpdateLocationDto, ApiResponse } from '../types/location';
+import type { Location, CreateLocationDto, UpdateLocationDto } from '../types/location';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -18,8 +18,6 @@ export const locationService = {
     params.append('pageSize', pageSize.toString());
     
     const response = await api.get<Location[]>(`/locations?${params}`);
-    const total = parseInt(response.headers['x-total-count'] || '0');
-    const totalPages = parseInt(response.headers['x-total-pages'] || '1');
     
     return response.data;
   },

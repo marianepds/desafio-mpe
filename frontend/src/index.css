@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  margin: 0;
-}
+/* TENTE ISSO no index.css: */
+@import "tailwindcss";
+/* OU */
+@import "tailwindcss" layer(base, components, utilities);
