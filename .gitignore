@@ -37,3 +37,7 @@ dist/
 build/ 
 out-tsc/ 
 infos.txt 
+*.sln 
+*.sin 
+*.csproj.user 
+.vs/ 
