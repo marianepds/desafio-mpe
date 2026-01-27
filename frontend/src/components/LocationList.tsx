@@ -67,7 +67,7 @@ const LocationList: React.FC<LocationListProps> = ({
           <MapPin className="w-8 h-8 text-[#504E76]" />
         </div>
         <h3 className="text-lg font-semibold text-[#504E76]">Nenhuma localização</h3>
-        <p className="text-gray-600 mt-2">Use o formulário para adicionar pontos no mapa</p>
+        <p className="text-gray-600 mt-2">Use o formulário para adicionar pontos no mapa</p>        
       </div>
     );
   }
