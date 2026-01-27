@@ -99,8 +99,8 @@ const LocationForm: React.FC<LocationFormProps> = ({
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
       <div className="flex items-center gap-2 mb-6">
-        <MapPin className="w-6 h-6 text-blue-600" />
-        <h2 className="text-xl font-bold text-gray-800">
+        <MapPin className="w-6 h-6 text-[#504E76]" />
+        <h2 className="text-xl font-bold text-[#504E76]">
           {isEditing ? 'Editar Localização' : 'Nova Localização'}
         </h2>
       </div>
@@ -203,7 +203,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#C4C3E3] hover:bg-[#C4C3E3]/20 text-[#504E76] font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Save className="w-4 h-4" />
             {isSubmitting ? 'Salvando...' : isEditing ? 'Atualizar' : 'Cadastrar'}

@@ -4,11 +4,23 @@ using LocationApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Encoder = 
+            System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    });
+
+
 builder.Services.AddControllers();           
 builder.Services.AddEndpointsApiExplorer();  
-builder.Services.AddOpenApi();            
+builder.Services.AddOpenApi(); 
+builder.Services.AddSwaggerGen();
 
-//cors
+// cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",       
@@ -31,6 +43,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/openapi/v1.json", "Location API v1");
+        c.RoutePrefix = "swagger"; 
+    });
 }
 
 app.UseHttpsRedirection();   // redireciona
@@ -44,4 +63,11 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();  
 }
 
-app.Run(); 
+// debug
+app.MapGet("/teste-api", () => "api funciona!");
+app.MapGet("/api/teste-locations", () => new[] { 
+    new { id = 99, name = "Teste API", lat = -29.68, lng = -53.80 } 
+});
+Console.WriteLine("debug adicionado");
+
+app.Run();

@@ -3,38 +3,56 @@ using LocationApi.Models;
 
 namespace LocationApi.Data
 {
-    // Herda de DbContext (classe do Entity Framework)
     public class AppDbContext : DbContext
     {
-        // CONSTRUTOR: Recebe configurações do banco
         public AppDbContext(DbContextOptions<AppDbContext> options) 
-            : base(options)  // Passa para a classe pai
+            : base(options)
         {
         }
 
-        // PROPRIEDADE: Representa a tabela "Locations" no banco
-        // DbSet<Location> = Conjunto de dados da tabela Location
         public DbSet<Location> Locations { get; set; }
 
-        // MÉTODO: Configurações extras do modelo
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);  // Chama configuração base
+            base.OnModelCreating(modelBuilder);
 
-            // Configurações específicas da tabela Location
             modelBuilder.Entity<Location>(entity =>
             {
-                // Configura a coluna Name
-                entity.Property(l => l.Name)
-                    .IsRequired()                 // NOT NULL no banco
-                    .HasMaxLength(100);          // VARCHAR(100)
+                entity.ToTable("locations");
+                
+                // MAPEAMENTO EXPLÍCITO minúsculo
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
+                    
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("name");
+                    
+                entity.Property(e => e.Latitude)
+                    .HasColumnType("decimal(10,6)")
+                    .HasColumnName("latitude");
+                    
+                entity.Property(e => e.Longitude)
+                    .HasColumnType("decimal(10,6)")
+                    .HasColumnName("longitude");
+                    
+                entity.Property(e => e.Description)
+                    .HasMaxLength(500)
+                    .HasColumnName("description");
+                    
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .ValueGeneratedOnAdd();
 
-                // Configura a coluna Description
-                entity.Property(l => l.Description)
-                    .HasMaxLength(500);          // VARCHAR(500)
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnName("updated_at")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                    .ValueGeneratedOnAddOrUpdate();
 
-                // Cria ÍNDICE na coluna Name (acelera buscas)
-                entity.HasIndex(l => l.Name);
+                entity.HasIndex(e => e.Name);
             });
         }
     }

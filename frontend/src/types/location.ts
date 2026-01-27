@@ -1,28 +1,19 @@
-export interface Location {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  description?: string;
-  createdAt: string;
-  updatedAt: string;
-}
 export interface CreateLocationDto {
   name: string;
   latitude: number;
   longitude: number;
-  description?: string;
+  description: string;
 }
-export interface UpdateLocationDto {
-  name?: string;
-  latitude?: number;
-  longitude?: number;
-  description?: string;
+
+export interface Location {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
-export interface ApiResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
+
+export interface UpdateLocationDto extends CreateLocationDto {
+  id: string;
 }
