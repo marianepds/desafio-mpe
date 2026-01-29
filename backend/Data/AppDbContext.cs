@@ -20,7 +20,6 @@ namespace LocationApi.Data
             {
                 entity.ToTable("locations");
                 
-                // MAPEAMENTO EXPLÍCITO minúsculo
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .ValueGeneratedOnAdd();

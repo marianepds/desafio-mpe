@@ -10,7 +10,7 @@ public class IntegrationTests
 {
     // TESTE 1: Criar localização com dados válidos
     [Test]
-    public async Task CreateLocation_WithValidData_SavesToDatabase()
+    public async Task CriaLoc()
     {
         // Arrange - Cria banco em memória
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -41,7 +41,7 @@ public class IntegrationTests
 
     // TESTE 2: Listar localizações cadastradas
     [Test]
-    public async Task GetLocations_ReturnsListWithCreatedLocation()
+    public async Task GetLoc()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -79,7 +79,7 @@ public class IntegrationTests
 
     // TESTE 3: Buscar por ID existente
     [Test]
-    public async Task GetLocationById_ExistingId_ReturnsLocation()
+    public async Task GetLoc_IDExists()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -110,7 +110,7 @@ public class IntegrationTests
 
     // TESTE 4: Buscar por ID inexistente
     [Test]
-    public async Task GetLocationById_NonExistingId_ReturnsNull()
+    public async Task GetLoc_IDNull()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -128,7 +128,7 @@ public class IntegrationTests
 
     // TESTE 5: Atualizar localização
     [Test]
-    public async Task UpdateLocation_ExistingId_UpdatesData()
+    public async Task UpdateLoc()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -165,7 +165,7 @@ public class IntegrationTests
 
     // TESTE 6: Remover localização
     [Test]
-    public async Task DeleteLocation_ExistingId_RemovesFromDatabase()
+    public async Task DelLoc()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<AppDbContext>()

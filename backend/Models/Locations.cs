@@ -1,4 +1,3 @@
-// Location.cs - PODE ficar simples assim:
 public class Location
 {
     public int Id { get; set; }

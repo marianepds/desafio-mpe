@@ -27,7 +27,7 @@ namespace LocationApi.Controllers
         }
 
         // GET: api/locations/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);
@@ -47,23 +47,20 @@ namespace LocationApi.Controllers
         }
         
         // PUT: api/locations/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutLocation(int id, Location location)
         {
             if (id != location.Id) return BadRequest();
 
-            // 1. Busque o registro EXISTENTE no banco
             var existingLocation = await _context.Locations.FindAsync(id);
             if (existingLocation == null) return NotFound();
 
-            // 2. Atualize apenas os campos que podem mudar (não mexa em CreatedAt!)
             existingLocation.Name = location.Name;
             existingLocation.Latitude = location.Latitude;
             existingLocation.Longitude = location.Longitude;
             existingLocation.Description = location.Description;
-            existingLocation.UpdatedAt = DateTime.UtcNow; // ← Atualize só o UpdatedAt
+            existingLocation.UpdatedAt = DateTime.UtcNow; 
 
-            // 3. Não use EntityState.Modified, só SaveChanges
             try
             {
                 await _context.SaveChangesAsync();
@@ -77,7 +74,7 @@ namespace LocationApi.Controllers
         }
 
         // DELETE: api/locations/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);
