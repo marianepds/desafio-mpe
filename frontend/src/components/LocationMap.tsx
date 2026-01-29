@@ -47,7 +47,7 @@ const LocationMap: React.FC<LocationMapProps> = ({
     return [parseCoord(lat), parseCoord(lng)];
   };
 
-  // Centro do mapa (Santa Maria, RS como fallback)
+  // Centro do mapa 
   const center: [number, number] = [-29.6842, -53.8069];
 
   return (
