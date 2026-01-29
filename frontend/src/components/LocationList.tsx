@@ -16,7 +16,6 @@ interface Location {
   createdAt?: string;
   UpdatedAt?: string;
   updatedAt?: string;
-  // Add other fields as needed
 }
 
 interface LocationListProps {
@@ -32,7 +31,6 @@ const LocationList: React.FC<LocationListProps> = ({
   onDelete,
   isLoading = false,
 }) => {
-  // Função universal para pegar qualquer propriedade (maiúsculo/minúsculo)
   const getProp = (obj: Location, ...keys: (string | number)[]): string | number => {
     for (const key of keys) {
       if ((obj as Record<string, unknown>)[key] !== undefined && (obj as Record<string, unknown>)[key] !== null) {

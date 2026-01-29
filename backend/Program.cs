@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
                 "http://localhost:5173",     
                 "http://localhost:3000")     
                   .AllowAnyHeader()          
-                  .AllowAnyMethod();    // get ou post     
+                  .AllowAnyMethod();      
         });
 });
 
@@ -54,7 +54,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();   // redireciona
 app.UseCors("AllowFrontend"); // aplica cors
-app.UseAuthorization();    // habilita autenticação e autorização
+app.UseAuthorization();    
 app.MapControllers();      
 
 using (var scope = app.Services.CreateScope())
