@@ -71,3 +71,5 @@ app.MapGet("/api/teste-locations", () => new[] {
 Console.WriteLine("debug adicionado");
 
 app.Run();
+
+public partial class Program { }
